@@ -72,8 +72,8 @@ class DataHandler:
             wFile.write('gapErrors: ' + str(self.gapError) + '\n')
             wFile.write('priceErrors: ' + str(self.priceError) + '\n')
 
-    #file split
-    def dataSplit(self, rFile, wFile, startDate, endDate):
+    #data extract
+    def dataExtract(self, rFile, wFile, startDate, endDate):
         readFile = open(rFile, 'r')
         writeFile = open(wFile, 'w')
         #start and end dates
