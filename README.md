@@ -1,4 +1,4 @@
-Stock intraday data checker & splitter class
+Stock intraday data check & extract class
 --------------------------------------------
 Following checks available:
 - Opening time of the day (0930)
@@ -6,8 +6,8 @@ Following checks available:
 - Gaps in time
 - Price and volume checks (>=0)
 
-Splitter:
-- Extracts data from given dates and creates a new data file
+Extract:
+- Extracts data from given dates (start -> end) and creates a new data file
 
 Public methods
 ---------------
@@ -15,8 +15,8 @@ checkData(file):
 - data checker
 - data from file
 
-dataSplit(rFile, wFile, startDate, endDate):
-- data splitter
+dataExtract(rFile, wFile, startDate, endDate):
+- data extract
 - data from rFile
 - new data file wFile
 - start date startDate (format: MM/DD/YYYY)
