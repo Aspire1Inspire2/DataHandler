@@ -12,12 +12,12 @@ Extract:
 Public methods
 ---------------
 checkData(file):
-- data checker
-- data from file
+- Data checker
+- Data from file
 
 dataExtract(rFile, wFile, startDate, endDate):
-- data extract
-- data from rFile
-- new data file wFile
-- start date startDate (format: MM/DD/YYYY)
-- end date endDate (format: MM/DD/YYYY)
+- Data extract
+- Data from rFile
+- New data file wFile
+- Start date startDate (format: MM/DD/YYYY)
+- End date endDate (format: MM/DD/YYYY)
