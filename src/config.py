@@ -8,3 +8,5 @@ TIME_FORMAT = '%H%M'
 TIME_DELTA = '01'
 #date format of the file
 DATE_FORMAT = '%m/%d/%Y'
+#file path
+PATH = '..\\'
