@@ -54,43 +54,53 @@ class DataHandler:
         
     #check time, price and volume fields of the data
     def checkData(self, fName):
-        rFile = open(fName, 'r')
-        #read header
-        rFile.readline()
-        #read rest of the file
-        for line in rFile.readlines():
-            #extract the time field
-            [date, time, open_, high, low, close, volume] = line.split(',')
-            self.__checkTime(time)
-            self.__checkPrice([float(open_), float(high), float(low), float(close), int(volume)])
-        rFile.close()
-        #write error file if errors found
-        if ((self.endTimeError + self.startTimeError + self.gapError + self.priceError) != 0):
-            wFile = open(fName.split('.')[0] + '_err.txt', 'w')
-            wFile.write('endTimeErrors: ' + str(self.endTimeError) + '\n')
-            wFile.write('startTimeErrors: ' + str(self.startTimeError) + '\n')
-            wFile.write('gapErrors: ' + str(self.gapError) + '\n')
-            wFile.write('priceErrors: ' + str(self.priceError) + '\n')
+        try:
+            rFile = open(PATH + fName, 'r')
+            try:
+                #read header
+                rFile.readline()
+                #read rest of the file
+                for line in rFile.readlines():
+                    #extract the time field
+                    [date, time, open_, high, low, close, volume] = line.split(',')
+                    self.__checkTime(time)
+                    self.__checkPrice([float(open_), float(high), float(low), float(close), int(volume)])
+                #write error file if errors found
+                if ((self.endTimeError + self.startTimeError + self.gapError + self.priceError) != 0):
+                    wFile = open(PATH + fName.split('.')[0] + '_err.txt', 'w')
+                    wFile.write('endTimeErrors: ' + str(self.endTimeError) + '\n')
+                    wFile.write('startTimeErrors: ' + str(self.startTimeError) + '\n')
+                    wFile.write('gapErrors: ' + str(self.gapError) + '\n')
+                    wFile.write('priceErrors: ' + str(self.priceError) + '\n')
+            finally:
+                rFile.close() 
+        except IOError:
+            print PATH + fName + ' not found !' 
 
     #data extract
     def dataExtract(self, rFile, wFile, startDate, endDate):
-        readFile = open(rFile, 'r')
-        writeFile = open(wFile, 'w')
-        #start and end dates
-        sDate = datetime.strptime(startDate, DATE_FORMAT)
-        eDate = datetime.strptime(endDate, DATE_FORMAT)
-        #print sDate
-        #read header
-        readFile.readline()
-        #read rest of the file
-        for line in readFile.readlines():
-            date = datetime.strptime(line.split(',')[0], DATE_FORMAT)
-            #print date
-            if ((date >= sDate) and (date <= eDate)):
-                #print line
-                writeFile.write(line)
-        readFile.close()
-        writeFile.close()
+        try:
+            readFile = open(PATH + rFile, 'r')
+            try:
+                writeFile = open(PATH + wFile, 'w')
+                #start and end dates
+                sDate = datetime.strptime(startDate, DATE_FORMAT)
+                eDate = datetime.strptime(endDate, DATE_FORMAT)
+                #print sDate
+                #read header
+                readFile.readline()
+                #read rest of the file
+                for line in readFile.readlines():
+                    date = datetime.strptime(line.split(',')[0], DATE_FORMAT)
+                    #print date
+                    if ((date >= sDate) and (date <= eDate)):
+                        #print line
+                        writeFile.write(line)
+            finally:
+                readFile.close()
+                writeFile.close()
+        except IOError:
+            print PATH + rFile + ' not found !'
         
                 
                 
